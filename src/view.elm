@@ -1,15 +1,15 @@
 module View exposing (..)
 
-import Html exposing (Html, div, text, button, span, h1)
-import Html.Attributes exposing (class, id)
-import State exposing (Model, Box, Msg, MarkerType, Board, GameStatus)
 import Dict exposing (..)
+import Html exposing (Html, button, div, h1, span, text)
+import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
+import State exposing (Board, Box, GameStatus, MarkerType, Model, Msg)
 
 
 row : List Box -> Html Msg
 row arr =
-    div [ class "row" ] (List.map (\box -> placeHolder box) (arr))
+    div [ class "row" ] (List.map (\box -> placeHolder box) arr)
 
 
 placeHolder : Box -> Html Msg
@@ -18,23 +18,25 @@ placeHolder box =
         marker =
             if box.mark == State.Cross then
                 "X"
+
             else if box.mark == State.Circle then
                 "O"
+
             else
                 ""
     in
-        div
-            [ class ("place-holder")
-            , id (toString (Tuple.first box.pos) ++ "-" ++ toString (Tuple.second box.pos))
-            , onClick (State.Mark box.pos)
-            ]
-            [ text marker ]
+    div
+        [ class "place-holder"
+        , id (String.fromInt (Tuple.first box.pos) ++ "-" ++ String.fromInt (Tuple.second box.pos))
+        , onClick (State.Mark box.pos)
+        ]
+        [ text marker ]
 
 
 viewRow : Int -> Board -> Html Msg
 viewRow rowNum board =
     row
-        ((Dict.filter (\( x, y ) val -> x == rowNum) board)
+        (Dict.filter (\( x, y ) val -> x == rowNum) board
             |> Dict.values
         )
 
@@ -42,8 +44,8 @@ viewRow rowNum board =
 viewButtons : Html Msg
 viewButtons =
     div [ class "button-group" ]
-        [ button [ class "btn", (onClick State.Undo) ] [ text "Undo" ]
-        , button [ class "btn", (onClick State.Reset) ] [ text "Reset" ]
+        [ button [ class "btn", onClick State.Undo ] [ text "Undo" ]
+        , button [ class "btn", onClick State.Reset ] [ text "Reset" ]
         ]
 
 
@@ -51,11 +53,11 @@ viewInfo : Model -> Html Msg
 viewInfo model =
     div [ class "information-board" ]
         [ div []
-            [ text ("Game Status: ")
+            [ text "Game Status: "
             , span [ class "game-status" ] [ text (mapModelGameStatusToViewName model.gameState.gameStatus) ]
             ]
         , div []
-            [ text ("Next Turn: ")
+            [ text "Next Turn: "
             , span [ class "next-turn" ] [ text (mapModelPlayerTypeToView model.gameState.nextTurn) ]
             ]
         ]

@@ -1,7 +1,7 @@
 module State exposing (..)
 
-import Dict exposing (..)
 import Array exposing (Array)
+import Dict exposing (..)
 
 
 type alias Box =
@@ -61,9 +61,9 @@ flatten2D list =
 buildInitialBoard : Board
 buildInitialBoard =
     Dict.fromList
-        ((List.map
+        (List.map
             (\row ->
-                (List.map
+                List.map
                     (\col ->
                         ( ( row, col )
                         , { mark = None
@@ -75,13 +75,11 @@ buildInitialBoard =
                         0
                         2
                     )
-                )
             )
             (List.range
                 0
                 2
             )
-         )
             |> flatten2D
         )
 
@@ -112,18 +110,19 @@ markBoxWithMarker marker board ( x, y ) =
                         Nothing ->
                             { mark = None, pos = ( -1, -1 ) }
 
-                        Just val ->
-                            { val | mark = marker }
+                        Just v ->
+                            { v | mark = marker }
             in
-                Just res
+            Just res
         )
         board
 
 
 findNextTurn : MarkerType -> MarkerType
 findNextTurn turn =
-    if (turn == Cross) then
+    if turn == Cross then
         Circle
+
     else
         Cross
 
@@ -134,12 +133,16 @@ isGameOver board currentTurn =
     if isAllRowsMarkedInSameColor board then
         Won (findNextTurn currentTurn)
         -- Check the coloums
+
     else if isAllColumnsMarkedInSameColor board then
         Won (findNextTurn currentTurn)
+
     else if isDiagonalsMarkedInSameColor board then
         Won (findNextTurn currentTurn)
+
     else if isMatchDrawn board then
         Drawn
+
     else
         InProgress
 
@@ -158,15 +161,17 @@ isMatchDrawn board =
                     |> List.filter (\box -> box.mark /= None)
                 )
     in
-        markedBoxesLength == Dict.size board
+    markedBoxesLength == Dict.size board
 
 
 isDiagonalsMarkedInSameColor : Board -> Bool
 isDiagonalsMarkedInSameColor board =
-    if (isAllBoxSameColor (fetchLeftDiagonalBoxes board)) then
+    if isAllBoxSameColor (fetchLeftDiagonalBoxes board) then
         True
-    else if (isAllBoxSameColor (fetchRightDiagonalBoxes board)) then
+
+    else if isAllBoxSameColor (fetchRightDiagonalBoxes board) then
         True
+
     else
         False
 
@@ -185,24 +190,30 @@ fetchRightDiagonalBoxes board =
 
 isAllRowsMarkedInSameColor : Board -> Bool
 isAllRowsMarkedInSameColor board =
-    if (isAllBoxSameColor (fetchAllBoxesInFirstRow board)) then
+    if isAllBoxSameColor (fetchAllBoxesInFirstRow board) then
         True
-    else if (isAllBoxSameColor (fetchAllBoxesInSecondRow board)) then
+
+    else if isAllBoxSameColor (fetchAllBoxesInSecondRow board) then
         True
-    else if (isAllBoxSameColor (fetchAllBoxesInThirdRow board)) then
+
+    else if isAllBoxSameColor (fetchAllBoxesInThirdRow board) then
         True
+
     else
         False
 
 
 isAllColumnsMarkedInSameColor : Board -> Bool
 isAllColumnsMarkedInSameColor board =
-    if (isAllBoxSameColor (fetchAllBoxesInFirstColumn board)) then
+    if isAllBoxSameColor (fetchAllBoxesInFirstColumn board) then
         True
-    else if (isAllBoxSameColor (fetchAllBoxesInSecondColumn board)) then
+
+    else if isAllBoxSameColor (fetchAllBoxesInSecondColumn board) then
         True
-    else if (isAllBoxSameColor (fetchAllBoxesInThirdColumn board)) then
+
+    else if isAllBoxSameColor (fetchAllBoxesInThirdColumn board) then
         True
+
     else
         False
 
@@ -261,10 +272,11 @@ isAllBoxSameColor arr =
         numOfCrosses =
             List.length (List.filter (\box -> box.mark == Cross) arr)
     in
-        if (totalLength == numOfCircles) || (totalLength == numOfCrosses) then
-            True
-        else
-            False
+    if (totalLength == numOfCircles) || (totalLength == numOfCrosses) then
+        True
+
+    else
+        False
 
 
 isMoveValid : Board -> ( Int, Int ) -> Bool
@@ -273,15 +285,16 @@ isMoveValid board ( x, y ) =
         box =
             Dict.get ( x, y ) board
     in
-        case box of
-            Nothing ->
-                False
+    case box of
+        Nothing ->
+            False
 
-            Just val ->
-                if (val.mark == None) then
-                    True
-                else
-                    False
+        Just val ->
+            if val.mark == None then
+                True
+
+            else
+                False
 
 
 isGameDone : GameStatus -> Bool
@@ -332,7 +345,7 @@ updateGameStatus gameState =
 pushGameStateToUndoList : Model -> Model
 pushGameStateToUndoList model =
     { model
-        | previousStates = (Array.push model.gameState model.previousStates)
+        | previousStates = Array.push model.gameState model.previousStates
     }
 
 
@@ -340,10 +353,11 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         Mark ( x, y ) ->
-            if isMoveValid model.gameState.boxes ( x, y ) && (not (isGameDone model.gameState.gameStatus)) then
+            if isMoveValid model.gameState.boxes ( x, y ) && not (isGameDone model.gameState.gameStatus) then
                 pushGameStateToUndoList model
                     |> updateMarkersState ( x, y )
                     |> updateGameState
+
             else
                 model
 
@@ -360,11 +374,11 @@ update msg model =
                         Just val ->
                             val
             in
-                { model
-                    | gameState = previousGameState
-                    , previousStates = Array.slice 0 -1 model.previousStates
-                    , nextStates = Array.push previousGameState model.nextStates
-                }
+            { model
+                | gameState = previousGameState
+                , previousStates = Array.slice 0 -1 model.previousStates
+                , nextStates = Array.push previousGameState model.nextStates
+            }
 
         Redo ->
             model
