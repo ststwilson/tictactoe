@@ -6598,10 +6598,10 @@ var $author$project$Main$viewHeader = A2(
 		]));
 var $author$project$Main$mapModelPlayerTypeToView = function (playerType) {
 	switch (playerType.$) {
-		case 'Circle':
-			return 'O';
 		case 'Cross':
-			return 'X';
+			return 'Zara';
+		case 'Circle':
+			return 'Raquel';
 		default:
 			return '';
 	}
@@ -6676,7 +6676,7 @@ var $elm$core$Tuple$second = function (_v0) {
 	return y;
 };
 var $author$project$Main$placeHolder = function (box) {
-	var marker = _Utils_eq(box.mark, $author$project$Main$Cross) ? 'X' : (_Utils_eq(box.mark, $author$project$Main$Circle) ? 'O' : '');
+	var marker = _Utils_eq(box.mark, $author$project$Main$Cross) ? 'Zara' : (_Utils_eq(box.mark, $author$project$Main$Circle) ? 'Raquel' : '');
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
