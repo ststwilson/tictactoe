@@ -404,10 +404,10 @@ placeHolder box =
     let
         marker =
             if box.mark == Cross then
-                "Zara"
+                "X"
 
             else if box.mark == Circle then
-                "Raquel"
+                "O"
 
             else
                 ""
@@ -491,10 +491,10 @@ mapModelPlayerTypeToView playerType =
     case playerType of
 
         Cross ->
-            "Zara"
+            "X"
 
         Circle ->
-            "Raquel"
+            "O"
 
         None ->
             ""

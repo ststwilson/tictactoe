@@ -1,0 +1,24 @@
+{
+  "name": "elmtictactoe",
+  "version": "1.0.0",
+  "description": "This is one version of tic tac toe game which has undo functionality. It shows how simple is to implement undo/redo/reset functionality. Elm rocks !!",
+  "main": "main.js",
+  "dependencies": {
+    "elm-live": "^4.0.2",
+    "webpack": "^4.43.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxWilson/ElmTicTacToeFork.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxWilson/ElmTicTacToeFork/issues"
+  },
+  "homepage": "https://github.com/MaxWilson/ElmTicTacToeFork#readme"
+}
