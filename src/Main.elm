@@ -3,8 +3,8 @@ module Main exposing (..)
 import Browser exposing (sandbox)
 import Array exposing (Array)
 import Dict exposing (..)
-import Html exposing (Html, button, div, h1, span, text)
-import Html.Attributes exposing (class, id)
+import Html exposing (Html, button, div, h1, span, text, img)
+import Html.Attributes exposing (class, id, src)
 import Html.Events exposing (onClick)
 
 main : Program () Model Msg
@@ -404,20 +404,20 @@ placeHolder box =
     let
         marker =
             if box.mark == Cross then
-                "X"
+                img [] [] -- "Cross" -- <img src="pic_trulli.jpg" alt="Italian Trulli">
 
             else if box.mark == Circle then
-                "O"
+                text "Circle"
 
             else
-                ""
+                text ""
     in
     div
         [ class "place-holder"
         , id (String.fromInt (Tuple.first box.pos) ++ "-" ++ String.fromInt (Tuple.second box.pos))
         , onClick (Mark box.pos)
         ]
-        [ text marker ]
+        [ marker ]
 
 
 viewRow : Int -> Board -> Html Msg
@@ -491,10 +491,10 @@ mapModelPlayerTypeToView playerType =
     case playerType of
 
         Cross ->
-            "X"
+            "CrOss"
 
         Circle ->
-            "O"
+            "CiRcLe"
 
         None ->
             ""

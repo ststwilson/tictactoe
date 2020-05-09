@@ -6599,9 +6599,9 @@ var $author$project$Main$viewHeader = A2(
 var $author$project$Main$mapModelPlayerTypeToView = function (playerType) {
 	switch (playerType.$) {
 		case 'Cross':
-			return 'X';
+			return 'CrOss';
 		case 'Circle':
-			return 'O';
+			return 'CiRcLe';
 		default:
 			return '';
 	}
@@ -6671,12 +6671,13 @@ var $author$project$Main$Mark = function (a) {
 	return {$: 'Mark', a: a};
 };
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
 	return y;
 };
 var $author$project$Main$placeHolder = function (box) {
-	var marker = _Utils_eq(box.mark, $author$project$Main$Cross) ? 'X' : (_Utils_eq(box.mark, $author$project$Main$Circle) ? 'O' : '');
+	var marker = _Utils_eq(box.mark, $author$project$Main$Cross) ? A2($elm$html$Html$img, _List_Nil, _List_Nil) : (_Utils_eq(box.mark, $author$project$Main$Circle) ? $elm$html$Html$text('Circle') : $elm$html$Html$text(''));
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
@@ -6688,9 +6689,7 @@ var $author$project$Main$placeHolder = function (box) {
 				$author$project$Main$Mark(box.pos))
 			]),
 		_List_fromArray(
-			[
-				$elm$html$Html$text(marker)
-			]));
+			[marker]));
 };
 var $author$project$Main$viewRow = F2(
 	function (rowNum, board) {
