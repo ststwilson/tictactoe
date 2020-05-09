@@ -6676,8 +6676,32 @@ var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
 	return y;
 };
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $author$project$Main$placeHolder = function (box) {
-	var marker = _Utils_eq(box.mark, $author$project$Main$Cross) ? A2($elm$html$Html$img, _List_Nil, _List_Nil) : (_Utils_eq(box.mark, $author$project$Main$Circle) ? $elm$html$Html$text('Circle') : $elm$html$Html$text(''));
+	var marker = _Utils_eq(box.mark, $author$project$Main$Cross) ? A2(
+		$elm$html$Html$img,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$src('Jesus.jpg'),
+				A2($elm$html$Html$Attributes$style, 'height', '120px'),
+				A2($elm$html$Html$Attributes$style, 'width', '120px')
+			]),
+		_List_Nil) : (_Utils_eq(box.mark, $author$project$Main$Circle) ? A2(
+		$elm$html$Html$img,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$src('sw2.jpg'),
+				A2($elm$html$Html$Attributes$style, 'height', '120px'),
+				A2($elm$html$Html$Attributes$style, 'width', '120px')
+			]),
+		_List_Nil) : $elm$html$Html$text(''));
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(

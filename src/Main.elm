@@ -4,7 +4,7 @@ import Browser exposing (sandbox)
 import Array exposing (Array)
 import Dict exposing (..)
 import Html exposing (Html, button, div, h1, span, text, img)
-import Html.Attributes exposing (class, id, src)
+import Html.Attributes exposing (class, id, src, style)
 import Html.Events exposing (onClick)
 
 main : Program () Model Msg
@@ -404,10 +404,10 @@ placeHolder box =
     let
         marker =
             if box.mark == Cross then
-                img [] [] -- "Cross" -- <img src="pic_trulli.jpg" alt="Italian Trulli">
+                img [src "Jesus.jpg", style "height" "120px", style "width" "120px"] [] -- "Cross" -- <img src="pic_trulli.jpg" alt="Italian Trulli">
 
             else if box.mark == Circle then
-                text "Circle"
+                img [src "sw2.jpg", style "height" "120px", style "width" "120px"] []
 
             else
                 text ""
